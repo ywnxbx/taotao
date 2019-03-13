@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- 配置包扫描 扫描@Controller @service -->
+	<context:component-scan base-package="com.taotao.content.service"></context:component-scan>
+	
+
+	<!-- 
+		使用dubbo发布服务 ，service，服务的提供者
+	-->
+	<!-- 1.提供应用信息，用于计算依赖关系 （什么被什么调用的关系，名称需要唯一 -->
+	<dubbo:application name="taotao-content" />
+	
+	<!-- 2.连接注册中心，注册服务提供者的地址。向注册中心提供ip及clientport 
+	目的：使注册中心可成功将自身服务节点（url）传递给消费者-->
+	<dubbo:registry protocol="zookeeper" address="192.168.25.128:2181" />
+	
+	<!-- 3.暴露服务端口，暴露服务接口。接口名 与web层（消费者）调用的接口名形同 -->
+	<!-- 3.1 暴露提供服务的端口。用dubbo协议在20881端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20881" />
+	<!-- 3.2 暴露提供服务的接口 -->
+	<dubbo:service interface="com.taotao.content.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="300000"/>
+	<dubbo:service interface="com.taotao.content.service.ContentService" ref="contentServiceImpl" timeout="300000"/>
+</beans>

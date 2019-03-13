@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [12/Mar/2019:20:00:20 +0800] "GET / HTTP/1.1" 200 2680 http-bio-8081-exec-2 1248
+127.0.0.1 - - [12/Mar/2019:20:00:45 +0800] "GET /rest/itemcat/all?callback=category.getDataService HTTP/1.1" 404 949 http-bio-8081-exec-5 13
+127.0.0.1 - - [12/Mar/2019:21:07:22 +0800] "GET /rest/itemcat/all?callback=category.getDataService HTTP/1.1" 404 949 http-bio-8081-exec-7 26
+127.0.0.1 - - [12/Mar/2019:21:33:45 +0800] "GET /rest/itemcat/all?callback=category.getDataService HTTP/1.1" 404 949 http-bio-8081-exec-9 13
+127.0.0.1 - - [12/Mar/2019:21:36:32 +0800] "GET /rest/itemcat/all?callback=category.getDataService HTTP/1.1" 404 949 http-bio-8081-exec-2 10
